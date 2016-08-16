@@ -17,49 +17,50 @@
 # Class: wso2base
 #
 # This class installs required system packages for WSO2 products and configures operating system parameters
-class wso2base {
-  $java_class             = hiera('java_class')
-  $java_prefs_system_root = hiera('java_prefs_system_root')
-  $java_prefs_user_root   = hiera('java_prefs_user_root')
-  $java_home              = hiera('java_home')
+class wso2base (
+  $java_class             = $wso2base::params::java_class,
+  $java_prefs_system_root = $wso2base::params::java_prefs_system_root,
+  $java_prefs_user_root   = $wso2base::params::java_prefs_user_root,
+  $java_home              = $wso2base::params::java_home,
 
   # system configuration data
-  $packages             = hiera_array('packages')
-  $template_list        = hiera_array('wso2::template_list')
-  $file_list            = hiera_array('wso2::file_list')
-  $system_file_list     = hiera_array('wso2::system_file_list')
-  $directory_list       = hiera_array('wso2::directory_list', [])
-  $hosts_mapping        = hiera_hash('wso2::hosts_mapping')
+  $packages               = $wso2base::params::packages,
+  $template_list          = $wso2base::params::template_list,
+  $file_list              = $wso2base::params::file_list,
+  $system_file_list       = $wso2base::params::system_file_list,
+  $directory_list         = $wso2base::params::directory_list,
+  $hosts_mapping          = $wso2base::params::hosts_mapping,
 
-  $master_datasources   = hiera_hash('wso2::master_datasources')
-  $registry_mounts      = hiera_hash('wso2::registry_mounts', { })
-  $carbon_home_symlink  = hiera('wso2::carbon_home_symlink')
-  $wso2_user            = hiera('wso2::user')
-  $wso2_group           = hiera('wso2::group')
-  $maintenance_mode     = hiera('wso2::maintenance_mode')
-  $install_mode         = hiera('wso2::install_mode')
-  $install_dir          = hiera('wso2::install_dir')
-  $pack_dir             = hiera('wso2::pack_dir')
-  $pack_filename        = hiera('wso2::pack_filename')
-  $pack_extracted_dir   = hiera('wso2::pack_extracted_dir')
-  $hostname             = hiera('wso2::hostname')
-  $mgt_hostname         = hiera('wso2::mgt_hostname')
-  $worker_node          = hiera('wso2::worker_node')
-  $patches_dir          = hiera('wso2::patches_dir')
-  $service_name         = hiera('wso2::service_name')
-  $service_template     = hiera('wso2::service_template')
-  $usermgt_datasource   = hiera('wso2::usermgt_datasource')
-  $local_reg_datasource = hiera('wso2::local_reg_datasource')
-  $clustering           = hiera('wso2::clustering')
-  $dep_sync             = hiera('wso2::dep_sync')
-  $ports                = hiera('wso2::ports')
-  $jvm                  = hiera('wso2::jvm')
-  $ipaddress            = hiera('wso2::ipaddress')
-  $fqdn                 = hiera('wso2::fqdn')
-  $sso_authentication   = hiera('wso2::sso_authentication')
-  $user_management      = hiera('wso2::user_management')
-  $enable_secure_vault  = hiera('wso2::enable_secure_vault')
-  $key_stores           = hiera('wso2::key_stores')
+  $master_datasources     = $wso2base::params::master_datasources,
+  $registry_mounts        = $wso2base::params::registry_mounts,
+  $carbon_home_symlink    = $wso2base::params::carbon_home_symlink,
+  $wso2_user              = $wso2base::params::wso2_user,
+  $wso2_group             = $wso2base::params::wso2_group,
+  $maintenance_mode       = $wso2base::params::maintenance_mode,
+  $install_mode           = $wso2base::params::install_mode,
+  $install_dir            = $wso2base::params::install_dir,
+  $pack_dir               = $wso2base::params::pack_dir,
+  $pack_filename          = $wso2base::params::pack_filename,
+  $pack_extracted_dir     = $wso2base::params::pack_extracted_dir,
+  $hostname               = $wso2base::params::hostname,
+  $mgt_hostname           = $wso2base::params::mgt_hostname,
+  $worker_node            = $wso2base::params::worker_node,
+  $patches_dir            = $wso2base::params::patches_dir,
+  $service_name           = $wso2base::params::service_name,
+  $service_template       = $wso2base::params::service_template,
+  $usermgt_datasource     = $wso2base::params::usermgt_datasource,
+  $local_reg_datasource   = $wso2base::params::local_reg_datasource,
+  $clustering             = $wso2base::params::clustering,
+  $dep_sync               = $wso2base::params::dep_sync,
+  $ports                  = $wso2base::params::ports,
+  $jvm                    = $wso2base::params::jvm,
+  $ipaddress              = $wso2base::params::ipaddress,
+  $fqdn                   = $wso2base::params::fqdn,
+  $sso_authentication     = $wso2base::params::sso_authentication,
+  $user_management        = $wso2base::params::user_management,
+  $enable_secure_vault    = $wso2base::params::enable_secure_vault,
+  $key_stores             = $wso2base::params::key_stores,
+) inherits wso2base::params {
 
   $carbon_home          = "${install_dir}/${pack_extracted_dir}"
 
