@@ -79,14 +79,14 @@ class wso2base (
     }
   }
 
-  class { '::wso2base::system':
-    packages         => $packages,
-    wso2_group       => $wso2_group,
-    wso2_user        => $wso2_user,
-    service_name     => $service_name,
-    service_template => $service_template,
-    hosts_mapping    => $hosts_mapping
-  }
+  # class { '::wso2base::system':
+  #   packages         => $packages,
+  #   wso2_group       => $wso2_group,
+  #   wso2_user        => $wso2_user,
+  #   service_name     => $service_name,
+  #   service_template => $service_template,
+  #   hosts_mapping    => $hosts_mapping
+  # }
 
   require $java_class
 }

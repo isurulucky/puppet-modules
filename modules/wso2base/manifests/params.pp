@@ -24,16 +24,6 @@ class wso2base::params {
     'zip',
     'unzip'
   ]
-  $template_list          = [
-    'repository/conf/carbon.xml',
-    'repository/conf/user-mgt.xml',
-    'repository/conf/registry.xml',
-    'repository/conf/datasources/master-datasources.xml',
-    'repository/conf/tomcat/catalina-server.xml',
-    'repository/conf/axis2/axis2.xml',
-    'repository/conf/security/authenticators.xml',
-    'bin/wso2server.sh'
-  ]
   $file_list              = []
   $system_file_list       = []
   $directory_list         = []
@@ -70,8 +60,8 @@ class wso2base::params {
   $pack_dir               = '/mnt/packs'
   $pack_filename          = "${::product_name}-${::product_version}.zip"
   $pack_extracted_dir     = "${::product_name}-${::product_version}"
-  $hostname               = 'carbon.wso2.com'
-  $mgt_hostname           = 'carbon.wso2.com'
+  $hostname               = 'localhost'
+  $mgt_hostname           = 'localhost'
   $worker_node            = false
   $patches_dir            = 'repository/components/patches'
   $service_name           = "${::product_name}"
