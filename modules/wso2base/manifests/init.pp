@@ -62,22 +62,22 @@ class wso2base (
   $key_stores             = $wso2base::params::key_stores,
 ) inherits wso2base::params {
 
-  $carbon_home          = "${install_dir}/${pack_extracted_dir}"
-
-  if ($enable_secure_vault == true) {
-    $secure_vault_configs = hiera('wso2::secure_vault_configs')
-    $key_store_password   = $secure_vault_configs['key_store_password']['password']
-  }
-
-  # marathon-lb cert configs
-  if ($::platform == 'mesos') {
-    $marathon_lb_cert_config = hiera('wso2::marathon_lb_cert_config')
-    $marathon_lb_cert_config_enabled = $marathon_lb_cert_config['enabled']
-    if ($marathon_lb_cert_config_enabled == true){
-      $trust_store_password   = $marathon_lb_cert_config['trust_store_password']
-      $cert_file = $marathon_lb_cert_config['cert_file']
-    }
-  }
+  # $carbon_home          = "${install_dir}/${pack_extracted_dir}"
+  #
+  # if ($enable_secure_vault == true) {
+  #   $secure_vault_configs = hiera('wso2::secure_vault_configs')
+  #   $key_store_password   = $secure_vault_configs['key_store_password']['password']
+  # }
+  #
+  # # marathon-lb cert configs
+  # if ($::platform == 'mesos') {
+  #   $marathon_lb_cert_config = hiera('wso2::marathon_lb_cert_config')
+  #   $marathon_lb_cert_config_enabled = $marathon_lb_cert_config['enabled']
+  #   if ($marathon_lb_cert_config_enabled == true){
+  #     $trust_store_password   = $marathon_lb_cert_config['trust_store_password']
+  #     $cert_file = $marathon_lb_cert_config['cert_file']
+  #   }
+  # }
 
   # class { '::wso2base::system':
   #   packages         => $packages,
@@ -88,5 +88,5 @@ class wso2base (
   #   hosts_mapping    => $hosts_mapping
   # }
 
-  require $java_class
+  # require $java_class
 }
