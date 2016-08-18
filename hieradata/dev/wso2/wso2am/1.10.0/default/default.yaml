@@ -14,7 +14,7 @@
 
 ---
 classes:
-  - wso2am
+  - profiles::wso2am
 
 wso2::template_list:
   - repository/conf/datasources/am-datasources.xml
