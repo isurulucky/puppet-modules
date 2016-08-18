@@ -15,7 +15,7 @@
 #----------------------------------------------------------------------------
 #
 # Manages system configuration
-class wso2base::system (
+define wso2base::system (
   $packages,
   $wso2_group,
   $wso2_user,
