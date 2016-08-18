@@ -18,14 +18,9 @@
 #
 # This class installs required system packages for WSO2 products and configures operating system parameters
 class wso2base (
-  $java_class             = $wso2base::params::java_class,
-  $java_prefs_system_root = $wso2base::params::java_prefs_system_root,
-  $java_prefs_user_root   = $wso2base::params::java_prefs_user_root,
-  $java_home              = $wso2base::params::java_home,
 
   # system configuration data
   $packages               = $wso2base::params::packages,
-  $template_list          = $wso2base::params::template_list,
   $file_list              = $wso2base::params::file_list,
   $system_file_list       = $wso2base::params::system_file_list,
   $directory_list         = $wso2base::params::directory_list,
@@ -60,6 +55,7 @@ class wso2base (
   $user_management        = $wso2base::params::user_management,
   $enable_secure_vault    = $wso2base::params::enable_secure_vault,
   $key_stores             = $wso2base::params::key_stores,
+
 ) inherits wso2base::params {
 
   # $carbon_home          = "${install_dir}/${pack_extracted_dir}"

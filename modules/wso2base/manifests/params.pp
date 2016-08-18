@@ -16,6 +16,8 @@
 
 class wso2base::params {
   $java_class             = 'wso2base::java'
+  $java_install_dir       = '/mnt/jdk-7u80'
+  $java_source_file       = 'jdk-7u80-linux-x64.tar.gz'
   $java_prefs_system_root = '/home/wso2user/.java'
   $java_prefs_user_root   = '/home/wso2user/.java/.systemPrefs'
   $java_home              = '/opt/java'

@@ -41,12 +41,6 @@ class wso2am (
   $enable_traffic_manager_specific_registry_configurations = $wso2am::params::enable_traffic_manager_specific_registry_configurations,
   # apim specific parameters - end
 
-  # other paramaters - start
-  $java_class             = $wso2base::params::java_class,
-  $java_prefs_system_root = $wso2base::params::java_prefs_system_root,
-  $java_prefs_user_root   = $wso2base::params::java_prefs_user_root,
-  $java_home              = $wso2base::params::java_home,
-
   # system configuration data
   $packages               = $wso2base::params::packages,
   $file_list              = $wso2base::params::file_list,
@@ -83,7 +77,6 @@ class wso2am (
   $user_management        = $wso2base::params::user_management,
   $enable_secure_vault    = $wso2base::params::enable_secure_vault,
   $key_stores             = $wso2base::params::key_stores
-
   # other paramaters - end
 
 ) inherits wso2am::params {
@@ -114,7 +107,7 @@ class wso2am (
     hosts_mapping    => $hosts_mapping
   }
 
-  require $java_class
+  # require $java_class
 
   wso2base::server { $carbon_home:
     maintenance_mode    => $maintenance_mode,

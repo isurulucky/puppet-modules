@@ -16,14 +16,14 @@
 #
 # Class to manage Java installation
 class wso2base::java (
-  $java_install_dir,
-  $java_source_file,
-  $wso2_user,
-  $wso2_group,
-  $java_home,
-  $prefs_system_root,
-  $prefs_user_root
-) {
+  $java_install_dir     = $wso2base::params::java_install_dir,
+  $java_source_file     = $wso2base::params::java_source_file,
+  $wso2_user            = $wso2base::params::wso2_user,
+  $wso2_group           = $wso2base::params::wso2_group,
+  $java_home            = $wso2base::params::java_home,
+  $prefs_system_root    = $wso2base::params::java_prefs_system_root,
+  $prefs_user_root      = $wso2base::params::java_prefs_user_root
+) inherits wso2base::params {
 
   ensure_resource('file', $java_install_dir, {
     ensure  => 'directory',

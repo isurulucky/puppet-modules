@@ -62,4 +62,6 @@ class profiles::wso2base {
   $_carbon_home          = "${_install_dir}/${_pack_extracted_dir}"
 
   include '::wso2base'
+
+  include $_java_class
 }

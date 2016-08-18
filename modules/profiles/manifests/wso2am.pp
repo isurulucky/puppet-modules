@@ -64,12 +64,6 @@ class profiles::wso2am inherits profiles::wso2base {
     enable_traffic_manager_specific_registry_configurations => $_enable_traffic_manager_specific_registry_configurations,
     # apim specific parameters - end
 
-    # other paramaters - start
-    java_class                => $_java_class,
-    java_prefs_system_root    => $_java_prefs_system_root,
-    java_prefs_user_root      => $_java_prefs_user_root,
-    java_home                 => $_java_home,
-
     # system configuration data
     packages                  => $_packages,
     file_list                 => $_file_list,
