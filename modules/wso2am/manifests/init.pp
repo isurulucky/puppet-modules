@@ -98,7 +98,7 @@ class wso2am (
     }
   }
 
-  class { '::wso2base::system':
+  wso2base::system { 'Creating User and Group':
     packages         => $packages,
     wso2_group       => $wso2_group,
     wso2_user        => $wso2_user,
