@@ -20,6 +20,8 @@ class profiles::wso2base {
   $_java_prefs_system_root = hiera('java_prefs_system_root')
   $_java_prefs_user_root   = hiera('java_prefs_user_root')
   $_java_home              = hiera('java_home')
+  $_java_install_dir       = hiera('wso2base::java::java_install_dir')
+  $_java_source_file       = hiera('wso2base::java::java_source_file')
 
   # system configuration data
   $_packages             = hiera_array('packages')
@@ -61,7 +63,24 @@ class profiles::wso2base {
 
   $_carbon_home          = "${_install_dir}/${_pack_extracted_dir}"
 
-  include '::wso2base'
+  class { '::wso2base':
+    packages         => $_packages,
+    wso2_group       => $_wso2_group,
+    wso2_user        => $_wso2_user,
+    service_name     => $_service_name,
+    service_template => $_service_template,
+    hosts_mapping    => $_hosts_mapping
+  }
 
-  include $_java_class
+  class { '::wso2base::java':
+    java_install_dir     => $_java_install_dir,
+    java_source_file     => $_java_source_file,
+    wso2_user            => $_wso2_user,
+    wso2_group           => $_wso2_group,
+    java_home            => $_java_home,
+    prefs_system_root    => $_java_prefs_system_root,
+    prefs_user_root      => $_java_prefs_user_root,
+  }
+
+  Class['::wso2base'] -> Class['::wso2base::java']
 }

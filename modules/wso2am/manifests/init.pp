@@ -118,6 +118,7 @@ class wso2am (
   if ($post_install_resources != undef) {
     ::wso2base::resource {
       $post_install_resources:
+        require => Wso2base::Clean_and_install["Cleaning and Installing $title"]
     }
   }
 
@@ -143,6 +144,7 @@ class wso2am (
   if ($post_configure_resources != undef) {
     ::wso2base::resource {
       $post_configure_resources:
+        require => Wso2base::Clean_and_install["Configuring and Deploying $title"]
     }
   }
 
@@ -155,6 +157,7 @@ class wso2am (
   if ($post_start_resources != undef) {
     ::wso2base::resource {
       $post_start_resources:
+        require => Wso2base::Start["Starting $title"]
     }
   }
 
