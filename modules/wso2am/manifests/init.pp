@@ -76,7 +76,11 @@ class wso2am (
   $sso_authentication     = $wso2base::params::sso_authentication,
   $user_management        = $wso2base::params::user_management,
   $enable_secure_vault    = $wso2base::params::enable_secure_vault,
-  $key_stores             = $wso2base::params::key_stores
+  $key_stores             = $wso2base::params::key_stores,
+
+  $post_install_resources    = $wso2am::params::post_install_resources,
+  $post_configure_resources  = $wso2am::params::post_configure_resources,
+  $post_start_resources      = $wso2am::params::post_start_resources
   # other paramaters - end
 
 ) inherits wso2am::params {
@@ -111,6 +115,12 @@ class wso2am (
     require               => Wso2base::System["Create system configurations for [product] ${::product_name} [profile] ${::product_profile} "]
   }
 
+  if ($post_install_resources != undef) {
+    ::wso2base::resource {
+      $post_install_resources:
+    }
+  }
+
   ::wso2base::configure_and_deploy { "Configuring and Deploying $title":
     install_dir                     => $install_dir,
     patches_dir                     => $patches_dir,
@@ -130,10 +140,22 @@ class wso2am (
     require                         => Wso2base::Clean_and_install["Cleaning and Installing $title"]
   }
 
+  if ($post_configure_resources != undef) {
+    ::wso2base::resource {
+      $post_configure_resources:
+    }
+  }
+
   ::wso2base::start {"Starting $title" :
     service_name => $service_name,
     install_dir  => $install_dir,
     require      => Wso2base::Configure_and_deploy["Configuring and Deploying $title"]
+  }
+
+  if ($post_start_resources != undef) {
+    ::wso2base::resource {
+      $post_start_resources:
+    }
   }
 
   # wso2base::system { 'Creating User and Group':

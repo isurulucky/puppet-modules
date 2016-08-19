@@ -93,6 +93,13 @@ class wso2am::params inherits wso2base::params {
   $apim_gateway_disable_jms_event_parameters                = false
   $enable_traffic_manager_specific_axis2_configurations     = false
   $enable_traffic_manager_specific_registry_configurations  = false
+
+  # $data1 = {'/mnt/foo' => { ensure => 'directory' }}
+  # $data2 = {'isuruh.org' => { name => 'isuruh.org', ensure => 'present', ip => '10.100.0.168'} }
+  # $post_install_resources                                   = [ {type => 'file', data => $data1}, {type => 'host', data => $data2} ]
+  $post_install_resources                                   = undef
+  $post_configure_resources                                 = undef
+  $post_start_resources                                     = undef
   # apim specific parameters - end
 
   # # common parameters - start

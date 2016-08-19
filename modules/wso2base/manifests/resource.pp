@@ -14,8 +14,21 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define wso2base::resource ($type, $data) {
+define wso2base::resource {
 
-  notice("Create resource [type] $type, [arguments] $data")
-  create_resources($type, $data)
+  # a resource passed to this defined type is expected to be of the following form:
+  # $resource = [ { type => 'resource type' , data => 'argument hash' } ]
+  # ex.: to create a file at /mnt/foo/bar
+  #
+  # $data = {
+  #   '/mnt/foo/bar' => { ensure => directory }
+  # }
+  #
+  # $resource = [ { type => file , data => $data } ]
+  #
+
+  if (size($name) == 2) {
+    notice("Create resource [type] $name['type'], [arguments] $name['data']")
+    create_resources($name['type'], $name['data'])
+  }
 }
