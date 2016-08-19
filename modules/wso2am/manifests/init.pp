@@ -98,35 +98,73 @@ class wso2am (
     }
   }
 
-  wso2base::system { 'Creating User and Group':
-    packages         => $packages,
-    wso2_group       => $wso2_group,
-    wso2_user        => $wso2_user,
-    service_name     => $service_name,
-    service_template => $service_template,
-    hosts_mapping    => $hosts_mapping
+  ::wso2base::clean_and_install { "Cleaning and Installing $title":
+    maintenance_mode      => $maintenance_mode,
+    install_mode          => $install_mode,
+    pack_filename         => $pack_filename,
+    pack_dir              => $pack_dir,
+    install_dir           => $install_dir,
+    wso2_user             => $wso2_user,
+    wso2_group            => $wso2_group,
+    carbon_home_symlink   => $carbon_home_symlink,
+    hosts_mappings        => $hosts_mapping,
+    require               => Wso2base::System["Create system configurations for [product] ${::product_name} [profile] ${::product_profile} "]
   }
 
-  # require $java_class
-
-  wso2base::server { $carbon_home:
-    maintenance_mode    => $maintenance_mode,
-    pack_filename       => $pack_filename,
-    pack_dir            => $pack_dir,
-    carbon_home_symlink => $carbon_home_symlink,
-    install_mode        => $install_mode,
-    install_dir         => $install_dir,
-    pack_extracted_dir  => $pack_extracted_dir,
-    wso2_user           => $wso2_user,
-    wso2_group          => $wso2_group,
-    patches_dir         => $patches_dir,
-    service_name        => $service_name,
-    service_template    => $service_template,
-    template_list       => $template_list,
-    directory_list      => $directory_list,
-    file_list           => $file_list,
-    system_file_list    => $system_file_list,
-    enable_secure_vault => $enable_secure_vault,
-    key_store_password  => $key_store_password
+  ::wso2base::configure_and_deploy { "Configuring and Deploying $title":
+    install_dir                     => $install_dir,
+    patches_dir                     => $patches_dir,
+    wso2_user                       => $wso2_user,
+    wso2_group                      => $wso2_group,
+    template_list                   => $template_list,
+    directory_list                  => $directory_list,
+    file_list                       => $file_list,
+    system_file_list                => $system_file_list,
+    enable_secure_vault             => $enable_secure_vault,
+    key_store_password              => $key_store_password,
+    java_home                       => $java_home,
+    cert_file                       => $cert_file,
+    trust_store_password            => $trust_store_password,
+    module_name                     => $title,
+    marathon_lb_cert_config_enabled => $marathon_lb_cert_config_enabled,
+    require                         => Wso2base::Clean_and_install["Cleaning and Installing $title"]
   }
+
+  ::wso2base::start {"Starting $title" :
+    service_name => $service_name,
+    install_dir  => $install_dir,
+    require      => Wso2base::Configure_and_deploy["Configuring and Deploying $title"]
+  }
+
+  # wso2base::system { 'Creating User and Group':
+  #   packages         => $packages,
+  #   wso2_group       => $wso2_group,
+  #   wso2_user        => $wso2_user,
+  #   service_name     => $service_name,
+  #   service_template => $service_template,
+  #   hosts_mapping    => $hosts_mapping
+  # }
+  #
+  # # require $java_class
+  #
+  # wso2base::server { $carbon_home:
+  #   maintenance_mode    => $maintenance_mode,
+  #   pack_filename       => $pack_filename,
+  #   pack_dir            => $pack_dir,
+  #   carbon_home_symlink => $carbon_home_symlink,
+  #   install_mode        => $install_mode,
+  #   install_dir         => $install_dir,
+  #   pack_extracted_dir  => $pack_extracted_dir,
+  #   wso2_user           => $wso2_user,
+  #   wso2_group          => $wso2_group,
+  #   patches_dir         => $patches_dir,
+  #   service_name        => $service_name,
+  #   service_template    => $service_template,
+  #   template_list       => $template_list,
+  #   directory_list      => $directory_list,
+  #   file_list           => $file_list,
+  #   system_file_list    => $system_file_list,
+  #   enable_secure_vault => $enable_secure_vault,
+  #   key_store_password  => $key_store_password
+  # }
 }

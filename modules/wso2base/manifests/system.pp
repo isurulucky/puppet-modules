@@ -57,8 +57,4 @@ define wso2base::system (
       content => template($service_template),
     }
   }
-
-  if $::vm_type != 'docker' {
-    create_resources(host, $hosts_mapping)
-  }
 }

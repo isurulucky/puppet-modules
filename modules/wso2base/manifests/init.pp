@@ -21,40 +21,40 @@ class wso2base (
 
   # system configuration data
   $packages               = $wso2base::params::packages,
-  $file_list              = $wso2base::params::file_list,
-  $system_file_list       = $wso2base::params::system_file_list,
-  $directory_list         = $wso2base::params::directory_list,
+  # $file_list              = $wso2base::params::file_list,
+  # $system_file_list       = $wso2base::params::system_file_list,
+  # $directory_list         = $wso2base::params::directory_list,
   $hosts_mapping          = $wso2base::params::hosts_mapping,
 
-  $master_datasources     = $wso2base::params::master_datasources,
-  $registry_mounts        = $wso2base::params::registry_mounts,
-  $carbon_home_symlink    = $wso2base::params::carbon_home_symlink,
+  # $master_datasources     = $wso2base::params::master_datasources,
+  # $registry_mounts        = $wso2base::params::registry_mounts,
+  # $carbon_home_symlink    = $wso2base::params::carbon_home_symlink,
   $wso2_user              = $wso2base::params::wso2_user,
   $wso2_group             = $wso2base::params::wso2_group,
-  $maintenance_mode       = $wso2base::params::maintenance_mode,
-  $install_mode           = $wso2base::params::install_mode,
-  $install_dir            = $wso2base::params::install_dir,
-  $pack_dir               = $wso2base::params::pack_dir,
-  $pack_filename          = $wso2base::params::pack_filename,
-  $pack_extracted_dir     = $wso2base::params::pack_extracted_dir,
-  $hostname               = $wso2base::params::hostname,
-  $mgt_hostname           = $wso2base::params::mgt_hostname,
-  $worker_node            = $wso2base::params::worker_node,
-  $patches_dir            = $wso2base::params::patches_dir,
+  # $maintenance_mode       = $wso2base::params::maintenance_mode,
+  # $install_mode           = $wso2base::params::install_mode,
+  # $install_dir            = $wso2base::params::install_dir,
+  # $pack_dir               = $wso2base::params::pack_dir,
+  # $pack_filename          = $wso2base::params::pack_filename,
+  # $pack_extracted_dir     = $wso2base::params::pack_extracted_dir,
+  # $hostname               = $wso2base::params::hostname,
+  # $mgt_hostname           = $wso2base::params::mgt_hostname,
+  # $worker_node            = $wso2base::params::worker_node,
+  # $patches_dir            = $wso2base::params::patches_dir,
   $service_name           = $wso2base::params::service_name,
   $service_template       = $wso2base::params::service_template,
-  $usermgt_datasource     = $wso2base::params::usermgt_datasource,
-  $local_reg_datasource   = $wso2base::params::local_reg_datasource,
-  $clustering             = $wso2base::params::clustering,
-  $dep_sync               = $wso2base::params::dep_sync,
-  $ports                  = $wso2base::params::ports,
-  $jvm                    = $wso2base::params::jvm,
-  $ipaddress              = $wso2base::params::ipaddress,
-  $fqdn                   = $wso2base::params::fqdn,
-  $sso_authentication     = $wso2base::params::sso_authentication,
-  $user_management        = $wso2base::params::user_management,
-  $enable_secure_vault    = $wso2base::params::enable_secure_vault,
-  $key_stores             = $wso2base::params::key_stores,
+  # $usermgt_datasource     = $wso2base::params::usermgt_datasource,
+  # $local_reg_datasource   = $wso2base::params::local_reg_datasource,
+  # $clustering             = $wso2base::params::clustering,
+  # $dep_sync               = $wso2base::params::dep_sync,
+  # $ports                  = $wso2base::params::ports,
+  # $jvm                    = $wso2base::params::jvm,
+  # $ipaddress              = $wso2base::params::ipaddress,
+  # $fqdn                   = $wso2base::params::fqdn,
+  # $sso_authentication     = $wso2base::params::sso_authentication,
+  # $user_management        = $wso2base::params::user_management,
+  # $enable_secure_vault    = $wso2base::params::enable_secure_vault,
+  # $key_stores             = $wso2base::params::key_stores,
 
 ) inherits wso2base::params {
 
@@ -83,6 +83,17 @@ class wso2base (
   #   service_template => $service_template,
   #   hosts_mapping    => $hosts_mapping
   # }
+  $carbon_home          = "${install_dir}/${pack_extracted_dir}"
+
+  ::wso2base::system { "Create system configurations for [product] ${::product_name} [profile] ${::product_profile} ":
+    packages         => $packages,
+    wso2_group       => $wso2_group,
+    wso2_user        => $wso2_user,
+    service_name     => $service_name,
+    service_template => $service_template,
+    hosts_mapping    => $hosts_mapping
+  }
 
   # require $java_class
+
 }
