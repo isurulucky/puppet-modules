@@ -98,7 +98,9 @@ class wso2am::params inherits wso2base::params {
   # $data2 = {'isuruh.org' => { name => 'isuruh.org', ensure => 'present', ip => '10.100.0.168'} }
   # $post_install_resources                                   = [ {type => 'file', data => $data1}, {type => 'host', data => $data2} ]
   $post_install_resources                                   = undef
+  # $data3 = {'isuruh.com' => { name => 'isuruh.com', ensure => 'present', ip => '10.100.0.169'} }
   $post_configure_resources                                 = undef
+  # $post_configure_resources                                 = [ {type => 'host', data => $data3} ]
   $post_start_resources                                     = undef
   # apim specific parameters - end
 
