@@ -144,7 +144,7 @@ class wso2am (
   if ($post_configure_resources != undef) {
     ::wso2base::resource {
       $post_configure_resources:
-        require => Wso2base::Clean_and_install["Configuring and Deploying $title"]
+        require => Wso2base::Configure_and_deploy["Configuring and Deploying $title"]
     }
   }
 
