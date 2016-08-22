@@ -101,7 +101,9 @@ class wso2am::params inherits wso2base::params {
   # $data3 = {'isuruh.com' => { name => 'isuruh.com', ensure => 'present', ip => '10.100.0.169'} }
   $post_configure_resources                                 = undef
   # $post_configure_resources                                 = [ {type => 'host', data => $data3} ]
-  $post_start_resources                                     = undef
+  $data4                                                      = { resource1 => {param1 =>'value1', param2 => 'value2'} }
+  $post_start_resources                                       = [{ type => 'wso2am::dynamic_type', data => $data4 }]
+  # $post_start_resources                                     = undef
   # apim specific parameters - end
 
   # # common parameters - start
