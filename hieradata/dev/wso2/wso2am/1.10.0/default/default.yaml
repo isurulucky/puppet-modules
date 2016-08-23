@@ -36,6 +36,26 @@ wso2::template_list:
 #wso2::file_list:
 #  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
+#wso2::post_configure_resources:
+#  -
+#    type: 'wso2base::remove_carbon_server_files'
+#    data:
+#      resource:
+#        carbon_home: "%{hiera('wso2::install_dir')}/%{hiera('wso2::pack_extracted_dir')}"
+#        file_list_to_remove:
+#            - repository/deployment/server/jaggeryapps/publisher
+#            - repository/deployment/server/jaggeryapps/store
+#  -
+#    type: 'wso2base::import_cert'
+#    data:
+#      resource:
+#        carbon_home: "%{hiera('wso2::install_dir')}/%{hiera('wso2::pack_extracted_dir')}"
+#        java_home: "%{hiera('java_home')}"
+#        cert_file: 'wso2demo.crt'
+#        trust_store_password: "%{hiera('wso2::key_stores::trust_store::password')}"
+#        alias_name: 'marathon-lb'
+
+
 wso2::service_name: wso2am
 wso2::hostname: am.dev.wso2.org
 wso2::mgt_hostname: am.dev.wso2.org
