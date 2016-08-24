@@ -76,6 +76,7 @@ class wso2am (
   $sso_authentication     = $wso2base::params::sso_authentication,
   $user_management        = $wso2base::params::user_management,
   $enable_secure_vault    = $wso2base::params::enable_secure_vault,
+  $secure_vault_configs   = $wso2base::params::secure_vault_configs,
   $key_stores             = $wso2base::params::key_stores,
 
   $post_install_resources    = $wso2am::params::post_install_resources,
@@ -88,19 +89,9 @@ class wso2am (
   $carbon_home          = "${install_dir}/${pack_extracted_dir}"
 
   if ($enable_secure_vault == true) {
-    $secure_vault_configs = hiera('wso2::secure_vault_configs')
     $key_store_password   = $secure_vault_configs['key_store_password']['password']
   }
 
-  # marathon-lb cert configs
-  if ($::platform == 'mesos') {
-    $marathon_lb_cert_config = hiera('wso2::marathon_lb_cert_config')
-    $marathon_lb_cert_config_enabled = $marathon_lb_cert_config['enabled']
-    if ($marathon_lb_cert_config_enabled == true){
-      $trust_store_password   = $marathon_lb_cert_config['trust_store_password']
-      $cert_file = $marathon_lb_cert_config['cert_file']
-    }
-  }
 
   ::wso2base::clean_and_install { "Cleaning and Installing $title":
     maintenance_mode      => $maintenance_mode,

@@ -36,6 +36,7 @@ class profiles::wso2am inherits profiles::wso2base {
   $_apim_gateway_disable_jms_event_parameters = hiera('wso2::apim_gateway_disable_jms_event_parameters', "false")
   $_enable_traffic_manager_specific_axis2_configurations = hiera('wso2::enable_traffic_manager_specific_axis2_configurations', "false")
   $_enable_traffic_manager_specific_registry_configurations = hiera('wso2::enable_traffic_manager_specific_registry_configurations', "false")
+  $_post_configure_resources = hiera('wso2::post_configure_resources', { })
 
   notice("WSO2 product profile class [name] $title")
 
@@ -99,6 +100,7 @@ class profiles::wso2am inherits profiles::wso2base {
     sso_authentication        => $_sso_authentication,
     user_management           => $_user_management,
     enable_secure_vault       => $_enable_secure_vault,
-    key_stores                => $_key_stores
+    key_stores                => $_key_stores,
+    post_configure_resources  => $_post_configure_resources
   }
 }

@@ -108,6 +108,7 @@ class wso2base::params {
     admin_password  => 'admin'
   }
   $enable_secure_vault    = false
+  $secure_vault_configs   = []
   $key_stores             = {
     key_store => {
       location => 'repository/resources/security/wso2carbon.jks',
