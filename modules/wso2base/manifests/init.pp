@@ -85,14 +85,14 @@ class wso2base (
   # }
   $carbon_home          = "${install_dir}/${pack_extracted_dir}"
 
-  ::wso2base::system { "Create system configurations for [product] ${::product_name} [profile] ${::product_profile} ":
-    packages         => $packages,
-    wso2_group       => $wso2_group,
-    wso2_user        => $wso2_user,
-    service_name     => $service_name,
-    service_template => $service_template,
-    hosts_mapping    => $hosts_mapping
-  }
+#  ::wso2base::system { "Create system configurations for [product] ${::product_name} [profile] ${::product_profile} ":
+#    packages         => $packages,
+#    wso2_group       => $wso2_group,
+#    wso2_user        => $wso2_user,
+#    service_name     => $service_name,
+#    service_template => $service_template,
+#    hosts_mapping    => $hosts_mapping
+#  }
 
   # require $java_class
 
