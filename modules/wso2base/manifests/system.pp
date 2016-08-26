@@ -21,7 +21,9 @@ define wso2base::system (
   $wso2_user,
   $service_name,
   $service_template,
-  $hosts_mapping
+  $hosts_mapping,
+  $prefs_system_root,
+  $prefs_user_root
 ) {
   # Install system packages
   package { $packages: ensure => installed }
@@ -57,4 +59,12 @@ define wso2base::system (
       content => template($service_template),
     }
   }
+
+  # Set Java system preferences directory
+  ensure_resource('file', [$prefs_system_root, $prefs_user_root], {
+    ensure  => 'directory',
+    owner => $wso2_user,
+    group => $wso2_group,
+    mode => 755
+  })
 }

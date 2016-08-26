@@ -14,7 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-class wso2am::params inherits wso2base::params {
+class wso2am::params {
 
   # apim specific parameters - start
   $am_datasources     = {

@@ -47,6 +47,10 @@ class wso2am (
   $system_file_list       = $wso2base::params::system_file_list,
   $directory_list         = $wso2base::params::directory_list,
   $hosts_mapping          = $wso2base::params::hosts_mapping,
+  $prefs_system_root      = $wso2base::params::java_prefs_system_root,
+  $prefs_user_root        = $wso2base::params::java_prefs_user_root,
+  $java_prefs_system_root = $wso2base::params::java_prefs_system_root,
+  $java_prefs_user_root   = $wso2base::params::java_prefs_user_root,
 
   $master_datasources     = $wso2base::params::master_datasources,
   $registry_mounts        = $wso2base::params::registry_mounts,
@@ -78,6 +82,7 @@ class wso2am (
   $enable_secure_vault    = $wso2base::params::enable_secure_vault,
   $secure_vault_configs   = $wso2base::params::secure_vault_configs,
   $key_stores             = $wso2base::params::key_stores,
+  $java_home              = $wso2base::params::java_home,
 
   $post_install_resources    = $wso2am::params::post_install_resources,
   $post_configure_resources  = $wso2am::params::post_configure_resources,
@@ -85,6 +90,17 @@ class wso2am (
   # other paramaters - end
 
 ) inherits wso2am::params {
+
+  ::wso2base::system { "Create system configurations for [product] ${::product_name} [profile] ${::product_profile} ":
+    packages          => $packages,
+    wso2_group        => $wso2_group,
+    wso2_user         => $wso2_user,
+    service_name      => $service_name,
+    service_template  => $service_template,
+    hosts_mapping     => $hosts_mapping,
+    prefs_system_root => $prefs_system_root,
+    prefs_user_root   => $prefs_user_root
+  }
 
   $carbon_home          = "${install_dir}/${pack_extracted_dir}"
 
